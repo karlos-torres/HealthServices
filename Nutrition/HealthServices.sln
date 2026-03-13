@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutrition", "Nutrition.csproj", "{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nutritionists", "Nutritionists", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutrition.Api", "..\Nutrition.Api\Nutrition.Api.csproj", "{CF255D5D-ADD8-424F-BB7C-F5ED54A7136E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF255D5D-ADD8-424F-BB7C-F5ED54A7136E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF255D5D-ADD8-424F-BB7C-F5ED54A7136E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF255D5D-ADD8-424F-BB7C-F5ED54A7136E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF255D5D-ADD8-424F-BB7C-F5ED54A7136E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{CF255D5D-ADD8-424F-BB7C-F5ED54A7136E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {271307A9-68F5-458C-A3C7-1616A8248694}
+	EndGlobalSection
+EndGlobal
