@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nutrition.Entities;
+namespace Boxing.Entities;
 
 public partial class Goal
 {

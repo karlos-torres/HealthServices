@@ -21,7 +21,7 @@ namespace Nutrition.DataAccess
 
         public async Task<NutritionistDto?> GetNutritionistById(int id)
         {
-            var nutritionist = await dbContext.Nutritionists.FirstOrDefaultAsync(a=>a.Id ==id);
+            var nutritionist = await dbContext.Nutritionists.FirstOrDefaultAsync(a => a.Id == id);
             var nutrionistDto = NutritionistDto.ToNutritionistDto(nutritionist);
             return nutrionistDto;
         }

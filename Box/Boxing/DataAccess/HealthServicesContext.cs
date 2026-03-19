@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Boxing.Entities;
 using Microsoft.EntityFrameworkCore;
-using Nutrition.Entities;
 
-namespace Nutrition.DataAccess;
+namespace Boxing.DataAccess;
 
 public partial class HealthServicesContext : DbContext
 {
@@ -17,8 +17,6 @@ public partial class HealthServicesContext : DbContext
     }
 
     public virtual DbSet<BoxSchedule> BoxSchedules { get; set; }
-
-    public virtual DbSet<BoxSchedulesMember> BoxSchedulesMembers { get; set; }
 
     public virtual DbSet<BoxTeacher> BoxTeachers { get; set; }
 
@@ -36,14 +34,26 @@ public partial class HealthServicesContext : DbContext
     {
         modelBuilder.Entity<BoxSchedule>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasOne(d => d.Teacher).WithMany(p => p.BoxSchedules)
+                .HasForeignKey(d => d.TeacherId)
+                .HasConstraintName("FK_BoxSchedules_BoxTeachers");
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
-        });
-
-        modelBuilder.Entity<BoxSchedulesMember>(entity =>
-        {
-            entity.HasKey(e => new { e.BoxScheduleId, e.MemberId });
+            entity.HasMany(d => d.Members).WithMany(p => p.BoxSchedules)
+                .UsingEntity<Dictionary<string, object>>(
+                    "BoxSchedulesMember",
+                    r => r.HasOne<Member>().WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_BoxSchedulesMembers_Members"),
+                    l => l.HasOne<BoxSchedule>().WithMany()
+                        .HasForeignKey("BoxScheduleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_BoxSchedulesMembers_BoxSchedules"),
+                    j =>
+                    {
+                        j.HasKey("BoxScheduleId", "MemberId");
+                        j.ToTable("BoxSchedulesMembers");
+                    });
         });
 
         modelBuilder.Entity<BoxTeacher>(entity =>

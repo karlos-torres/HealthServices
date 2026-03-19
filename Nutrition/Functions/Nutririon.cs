@@ -14,7 +14,7 @@ using System.Text.Json;
 
 namespace Nutrition.Functions;
 
-public class Nutririon(ILogger<Nutririon> logger, IConfiguration configuration, HealthServicesContext dbContext)
+public class Nutririon(ILogger<Nutririon> logger, HealthServicesContext dbContext)
 {
     private Nutritionists nutrition = new Nutritionists(dbContext);
 
@@ -39,7 +39,7 @@ public class Nutririon(ILogger<Nutririon> logger, IConfiguration configuration, 
     public async Task<IActionResult> AddNutritionists([HttpTrigger(AuthorizationLevel.Function, "post", Route = "nutritionists")] HttpRequest req)
     {
         NutritionistRequest? nutritionistRequest = null;
-        Nutritionist? response =null;
+        Nutritionist? response = null;
 
         try
         {
@@ -72,7 +72,7 @@ public class Nutririon(ILogger<Nutririon> logger, IConfiguration configuration, 
             Console.WriteLine("\nException Caught!");
             Console.WriteLine("Message :{0} ", e.Message);
         }
-        return  responseDto != null ? new OkObjectResult(responseDto) : new NotFoundResult();
+        return responseDto != null ? new OkObjectResult(responseDto) : new NotFoundResult();
     }
 
 

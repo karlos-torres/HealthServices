@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nutrition.Entities;
+namespace Boxing.Entities;
 
 public partial class Member
 {
@@ -16,6 +16,8 @@ public partial class Member
     public int? GoalId { get; set; }
 
     public virtual Goal? Goal { get; set; }
+
+    public virtual ICollection<BoxSchedule> BoxSchedules { get; set; } = new List<BoxSchedule>();
 
     public virtual ICollection<Nutritionist> Nutritionists { get; set; } = new List<Nutritionist>();
 }

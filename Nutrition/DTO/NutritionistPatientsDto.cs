@@ -30,10 +30,11 @@ namespace Nutrition.DTO
                 NutritionistLastName = entity.LastName,
                 NutritionistDob = entity.Dob,
                 NutritionistDescription = entity.Description,
-                Patients = entity.Patients.Select(p => new PatientsDto { 
-                    PatientId = p.Id, 
+                Patients = entity.Patients.Select(p => new PatientsDto
+                {
+                    PatientId = p.Id,
                     PatientFirstName = p.FirstName,
-                   PatientLastName = p.LastName,
+                    PatientLastName = p.LastName,
                     PatientDob = p.Dob,
                 }).ToList()
             } : null;
