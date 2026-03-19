@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nutrition.Api.Entities;
+namespace Nutrition.Entities;
 
-public partial class Nutritionist
+public partial class Instructor
 {
     public int Id { get; set; }
 

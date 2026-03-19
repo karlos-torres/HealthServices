@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nutrition.Api.Entities;
+namespace Nutrition.Entities;
 
 public partial class BoxSchedulesMember
 {

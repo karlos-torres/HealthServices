@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nutrition.Api.Entities;
+namespace Nutrition.Entities;
 
-public partial class Instructor
+public partial class Member
 {
     public int Id { get; set; }
 
@@ -13,5 +13,7 @@ public partial class Instructor
 
     public DateOnly? Dob { get; set; }
 
-    public string? Description { get; set; }
+    public int? GoalId { get; set; }
+
+    public virtual ICollection<Nutritionist> Nutritionists { get; set; } = new List<Nutritionist>();
 }

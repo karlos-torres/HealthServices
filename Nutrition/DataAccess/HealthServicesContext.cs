@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Nutrition.Api.Entities;
+using Nutrition.Entities;
 
-namespace Nutrition.Api.DataAccess;
+namespace Nutrition.DataAccess;
 
 public partial class HealthServicesContext : DbContext
 {
@@ -30,13 +30,7 @@ public partial class HealthServicesContext : DbContext
 
     public virtual DbSet<Nutritionist> Nutritionists { get; set; }
 
-    public virtual DbSet<NutritionistsPatient> NutritionistsPatients { get; set; }
-
     public virtual DbSet<Routine> Routines { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=HealthServices;Integrated Security=true;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -105,11 +99,23 @@ public partial class HealthServicesContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(150)
                 .IsUnicode(false);
-        });
 
-        modelBuilder.Entity<NutritionistsPatient>(entity =>
-        {
-            entity.HasKey(e => new { e.NutritionistId, e.PatientId });
+            entity.HasMany(d => d.Patients).WithMany(p => p.Nutritionists)
+                .UsingEntity<Dictionary<string, object>>(
+                    "NutritionistsPatient",
+                    r => r.HasOne<Member>().WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_NutritionistsPatients_Members"),
+                    l => l.HasOne<Nutritionist>().WithMany()
+                        .HasForeignKey("NutritionistId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_NutritionistsPatients_Nutritionists"),
+                    j =>
+                    {
+                        j.HasKey("NutritionistId", "PatientId");
+                        j.ToTable("NutritionistsPatients");
+                    });
         });
 
         modelBuilder.Entity<Routine>(entity =>
