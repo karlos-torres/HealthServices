@@ -19,7 +19,7 @@ public class Nutririon(ILogger<Nutririon> logger, IConfiguration configuration, 
     private Nutritionists nutrition = new Nutritionists(dbContext);
 
     [Function("Nutritionists")]
-    public async Task<IActionResult> GetNutritionists([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
+    public async Task<IActionResult> GetNutritionists([HttpTrigger(AuthorizationLevel.Function, "get", Route = "nutritionists")] HttpRequest req)
     {
         List<NutritionistDto>? responseDto = null;
 
@@ -36,7 +36,7 @@ public class Nutririon(ILogger<Nutririon> logger, IConfiguration configuration, 
     }
 
     [Function("AddNutritionists")]
-    public async Task<IActionResult> AddNutritionists([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequest req)
+    public async Task<IActionResult> AddNutritionists([HttpTrigger(AuthorizationLevel.Function, "post", Route = "nutritionists")] HttpRequest req)
     {
         NutritionistRequest? nutritionistRequest = null;
         Nutritionist? response =null;
