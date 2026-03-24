@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxing", "..\Box\Boxing\Box
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gym", "..\Gym\Gym\Gym.csproj", "{B542033E-8E66-405E-894F-5003045CB079}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkOut", "WorkOut", "{EC6D1960-8F70-4A31-80BD-0E60B133F9AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8DCEBAC1-C13B-4C65-85D8-62A1F7B6DBCD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{A782D7EF-88FB-4349-98B0-61E56A25172E} = {C254C9BB-8BD6-4129-A0E0-EF6DA67FFD68}
+		{B542033E-8E66-405E-894F-5003045CB079} = {EC6D1960-8F70-4A31-80BD-0E60B133F9AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {271307A9-68F5-458C-A3C7-1616A8248694}
