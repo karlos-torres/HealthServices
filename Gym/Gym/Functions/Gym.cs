@@ -2,6 +2,7 @@ using Gym.DataAccess;
 using Gym.DTO;
 using Gym.Entities;
 using Gym.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -15,7 +16,8 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     private GymClass gym = new GymClass(dbContext);
 
     [Function("GymMembers")]
-    public async Task<IActionResult> GetMembers([HttpTrigger(AuthorizationLevel.Function, "get", Route = "members")] HttpRequest req)
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetMembers([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "members")] HttpRequest req)
     {
         List<MembersDto>? memberDto = null;
 
@@ -33,7 +35,7 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     }
 
     [Function("GymMembersById")]
-    public async Task<IActionResult> GetGymMemberById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "members/{id}")] HttpRequest req, int id)
+    public async Task<IActionResult> GetGymMemberById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "members/{id}")] HttpRequest req, int id)
     {
         logger.LogInformation("Get Member by Id request.");
         MembersDto? responseDto = null;
@@ -51,7 +53,7 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     }
 
     [Function("GymTrainers")]
-    public async Task<IActionResult> GetTrainers([HttpTrigger(AuthorizationLevel.Function, "get", Route = "trainers")] HttpRequest req)
+    public async Task<IActionResult> GetTrainers([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "trainers")] HttpRequest req)
     {
         List<TrainersDto>? trainerDto = null;
 
@@ -68,7 +70,7 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     }
 
     [Function("GymTrainersById")]
-    public async Task<IActionResult> GetTrainersById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "trainers/{id}")] HttpRequest req, int id)
+    public async Task<IActionResult> GetTrainersById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "trainers/{id}")] HttpRequest req, int id)
     {
         logger.LogInformation("Get Trainer by Id request.");
         TrainersDto? responseDto = null;
@@ -86,7 +88,7 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     }
 
     [Function("RoutineById")]
-    public async Task<IActionResult> GetRoutineById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "routines/{id}")] HttpRequest req, int id)
+    public async Task<IActionResult> GetRoutineById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "routines/{id}")] HttpRequest req, int id)
     {
         logger.LogInformation("Get Routine by Id request.");
         RoutinesDto? responseDto = null;
@@ -104,7 +106,7 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     }
 
     [Function("Goals")]
-    public async Task<IActionResult> GetGoals([HttpTrigger(AuthorizationLevel.Function, "get", Route = "goals")] HttpRequest req)
+    public async Task<IActionResult> GetGoals([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "goals")] HttpRequest req)
     {
         List<GoalsDto>? goalDto = null;
 
@@ -121,7 +123,7 @@ public class Gym(ILogger<Gym> logger, HealthServicesContext dbContext)
     }
 
     [Function("AddMembers")]
-    public async Task<IActionResult> AddMembers([HttpTrigger(AuthorizationLevel.Function, "post", Route = "members")] HttpRequest req)
+    public async Task<IActionResult> AddMembers([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "members")] HttpRequest req)
     {
         MemberRequest? memberRequest = null;
         Member? response = null;
